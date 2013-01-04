@@ -5,8 +5,8 @@
     "author": "Mathieu Lecarme <mathieu@garambrogne.net>",
     "description": "Json file as storage",
     "devDependencies": {
-        "mocha": " >= 1.2.0",
-        "should": "*"
+        "mocha": " >= 1.7.0",
+        "should": " >= 1.2.0"
     },
     "keywords": [],
     "engines": ["node >= 0.8.0"],
@@ -14,6 +14,6 @@
         "type": "MIT"
     },
     "scripts": {
-        "test": "./node_modules/.bin/mocha"
+        "test": "./node_modules/.bin/mocha -R list -C"
     }
 }
