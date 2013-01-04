@@ -1,0 +1,19 @@
+{
+    "name": "jsonstore",
+    "version": "0.0.1",
+    "main": "./lib/jsonstore",
+    "author": "Mathieu Lecarme <mathieu@garambrogne.net>",
+    "description": "Json file as storage",
+    "devDependencies": {
+        "mocha": " >= 1.2.0",
+        "should": "*"
+    },
+    "keywords": [],
+    "engines": ["node >= 0.8.0"],
+    "licences": {
+        "type": "MIT"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/mocha"
+    }
+}
