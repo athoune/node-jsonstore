@@ -37,7 +37,7 @@ describe('Store', function() {
                 s.on('refresh', function() {
                     s.data.beuha.should.eql('plop');
                     done();
-                })
+                });
                 fs.writeFileSync(PATH, JSON.stringify({'beuha': 'plop'}));
             });
         });
