@@ -11,14 +11,23 @@ describe('Store', function() {
             done();
         })
     });
-    describe('read', function() {
+    describe('read/write', function() {
         it('should read test file', function(done) {
-            var s = new jsonstore.Store('./test/toto.json', function() {
+            var s = new jsonstore.Store(PATH, function() {
                 s.data.beuha.should.eql('Aussi');
                 done();
             });
-        })
-    })
+        });
+        it('should write stuff', function(done) {
+            var s = new jsonstore.Store(PATH, function() {
+                s.data.beuha = 42;
+                s.write(function() {
+                    JSON.parse(fs.readFileSync(PATH)).beuha.should.eql(42);
+                    done();
+                });
+            });
+        });
+    });
 });
 
 
