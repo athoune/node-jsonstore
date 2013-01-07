@@ -21,6 +21,9 @@ describe('Store', function() {
         it('should write stuff', function(done) {
             var s = new jsonstore.Store(PATH, function() {
                 s.data.beuha = 42;
+                s.on('refresh', function() {
+                    throw "written, not refreshed.";
+                });
                 s.write(function() {
                     JSON.parse(fs.readFileSync(PATH)).beuha.should.eql(42);
                     done();
@@ -35,9 +38,7 @@ describe('Store', function() {
                     s.data.beuha.should.eql('plop');
                     done();
                 })
-                setTimeout(function() {
-                    fs.writeFileSync(PATH, JSON.stringify({'beuha': 'plop'}));
-                }, 1000); //Damned, fs mtime min diff is 1 second
+                fs.writeFileSync(PATH, JSON.stringify({'beuha': 'plop'}));
             });
         });
     });
