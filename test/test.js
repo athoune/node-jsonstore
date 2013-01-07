@@ -8,8 +8,8 @@ describe('Store', function() {
                 s.data.beuha.should.eql('Aussi');
                 done();
             });
-        })
-    })
+        });
+    });
 });
 
 

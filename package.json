@@ -5,9 +5,14 @@
     "author": "Mathieu Lecarme <mathieu@garambrogne.net>",
     "description": "Json file as storage",
     "devDependencies": {
+        "grunt": "~0.4.0",
+        "grunt-contrib-jshint": "latest",
+        "grunt-contrib-watch": "latest",
+        "grunt-simple-mocha": "latest",
         "mocha": " >= 1.7.0",
         "should": " >= 1.2.0"
     },
+
     "keywords": [],
     "engines": ["node >= 0.8.0"],
     "licences": {
