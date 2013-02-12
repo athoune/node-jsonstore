@@ -2,13 +2,26 @@ var should = require('should'),
     fs = require('fs'),
     jsonstore = require('../lib/jsonstore');
 
+describe('Empty store', function() {
+    var PATH = '/tmp/toto.json';
+    it('should build an empty store', function(done) {
+        fs.unlink(PATH, function() {
+            var s = new jsonstore.Store(PATH, function() {
+                this.data.should.eql({});
+                done();
+            });
+        });
+    });
+});
+
 describe('Store', function() {
     var PATH = './test/toto.json';
 
     beforeEach(function(done) {
         fs.writeFile(PATH, JSON.stringify({'beuha': 'Aussi'}), function(err) {
             if (err) throw err;
-            done();
+            //FIXME The store should handle file destruction
+            setTimeout(done, 1);
         });
     });
     describe('read/write', function() {
@@ -38,7 +51,7 @@ describe('Store', function() {
                     s.data.beuha.should.eql('plop');
                     done();
                 });
-                fs.writeFileSync(PATH, JSON.stringify({'beuha': 'plop'}));
+                fs.writeFile(PATH, JSON.stringify({'beuha': 'plop'}));
             });
         });
     });
