@@ -19,9 +19,8 @@ describe('Store', function() {
 
     beforeEach(function(done) {
         fs.writeFile(PATH, JSON.stringify({'beuha': 'Aussi'}), function(err) {
-            if (err) throw err;
-            //FIXME The store should handle file destruction
-            setTimeout(done, 1);
+            if (err) throw err
+            done();
         });
     });
     describe('read/write', function() {
@@ -46,10 +45,14 @@ describe('Store', function() {
     });
     describe('handling file watch', function() {
         it('should watch file changed', function(done) {
+            var once = true;
             var s = new jsonstore.Store(PATH, function() {
                 this.on('refresh', function() {
                     s.data.beuha.should.eql('plop');
-                    done();
+                    if (once) {
+                        once = false;
+                        done();
+                    }
                 });
                 fs.writeFile(PATH, JSON.stringify({'beuha': 'plop'}));
             });
