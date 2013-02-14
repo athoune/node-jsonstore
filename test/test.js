@@ -19,7 +19,7 @@ describe('Store', function() {
 
     beforeEach(function(done) {
         fs.writeFile(PATH, JSON.stringify({'beuha': 'Aussi'}), function(err) {
-            if (err) throw err
+            if (err) throw err;
             done();
         });
     });
@@ -34,7 +34,7 @@ describe('Store', function() {
             var s = new jsonstore.Store(PATH, function() {
                 this.data.beuha = 42;
                 this.on('refresh', function() {
-                    throw 'written, not refreshed.';
+                    throw Error('written, not refreshed.');
                 });
                 this.write(function() {
                     JSON.parse(fs.readFileSync(PATH)).beuha.should.eql(42);
