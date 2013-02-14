@@ -1,6 +1,6 @@
 {
     "name": "jsonstore",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "main": "./lib/jsonstore",
     "author": "Mathieu Lecarme <mathieu@garambrogne.net>",
     "description": "Json file as storage",

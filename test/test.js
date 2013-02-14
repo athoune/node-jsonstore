@@ -33,28 +33,10 @@ describe('Store', function() {
         it('should write stuff', function(done) {
             var s = new jsonstore.Store(PATH, function() {
                 this.data.beuha = 42;
-                this.on('refresh', function() {
-                    throw Error('written, not refreshed.');
-                });
                 this.write(function() {
                     JSON.parse(fs.readFileSync(PATH)).beuha.should.eql(42);
                     done();
                 });
-            });
-        });
-    });
-    describe('handling file watch', function() {
-        it('should watch file changed', function(done) {
-            var once = true;
-            var s = new jsonstore.Store(PATH, function() {
-                this.on('refresh', function() {
-                    s.data.beuha.should.eql('plop');
-                    if (once) {
-                        once = false;
-                        done();
-                    }
-                });
-                fs.writeFile(PATH, JSON.stringify({'beuha': 'plop'}));
             });
         });
     });
