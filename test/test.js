@@ -59,3 +59,20 @@ describe('Store', function() {
         });
     });
 });
+
+describe('Use store', function() {
+    var DATA = {
+        '1': {'name': 'Bob', 'age': 42},
+        '2': {'name': 'Tintin', 'age': 77}
+    };
+    var PATH = './test/toto.json';
+    var store;
+
+    beforeEach(function(done) {
+        store = jsonstore.store(PATH, function(error) {
+            if (error) throw error;
+            this.data = DATA;
+            done();
+        });
+    });
+});
