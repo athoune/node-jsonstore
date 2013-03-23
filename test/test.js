@@ -1,6 +1,23 @@
 var should = require('should'),
     fs = require('fs'),
+    Queue = require('../lib/queue').Queue,
     jsonstore = require('../lib/jsonstore');
+
+describe('Queue', function() {
+    it('should execute sequentially', function(done) {
+        var ctx = new Object();
+        var q = new Queue(ctx);
+        var cpt = 0;
+        q.push(function(next) {
+            cpt += 1;
+            process.nextTick(next);
+        });
+        q.push(function(next) {
+            cpt.should.eql(1);
+            done();
+        });
+    });
+});
 
 describe('Empty store', function() {
     var PATH = '/tmp/toto.json';
@@ -35,11 +52,10 @@ describe('Store', function() {
                 this.data.beuha = 42;
                 this.write(function() {
                     JSON.parse(fs.readFileSync(PATH)).beuha.should.eql(42);
+                    s.data.beuha.should.eql(42);
                     done();
                 });
             });
         });
     });
 });
-
-
